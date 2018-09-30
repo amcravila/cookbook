@@ -13,7 +13,6 @@ $(document).ready(() => {
   function index() {
     $('main').html(renderIndex());
     $('#recipes').click(getRecipes);
-    // $('#myRecipes').click(getRecipes);
         // $('#btn-src').click(searchRecipe);
   }
 
@@ -26,11 +25,12 @@ $(document).ready(() => {
     $('main').html(renderRecipe);
     $('a').click(showOneRecipe(event));
     $('a').click(callRecipe());
+    $('.clicked').click(clickFavorite);
   }
 
   function favorites() {
-    $('main').html(renderFavorites());
-    // $('#myRecipes').click(loadFavorites);
+    $('main').html(renderFavorites);
+    $('#myRecipes').click(loadFavorites());
   }
 
   function searchResult() {

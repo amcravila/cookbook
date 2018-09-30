@@ -1,5 +1,4 @@
 function renderIndex() {
-  const favorites = JSON.parse(localStorage.getItem('Favoritos'));
   return `
     <div class="background-overlay" style="background-image: url(/dist/img/livro.jpg);">
     <div class="container h-100">
@@ -29,9 +28,9 @@ function renderRecipeList() {
 function renderRecipe() {
   return `
     <div class="container h-100">
-      <div class="row h-100 align-itens-center">
-        <div class="col-12 name align-center"></div>
-        <div id="view-recipe"></div>
+      <div class="row h-100">
+        <div class="col-12 name class="my-5"></div>
+        <div id="view-recipe" class="mt-4"></div>
       </div>
     </div>
   `;

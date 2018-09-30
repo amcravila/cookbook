@@ -1,8 +1,11 @@
 let nameRecipe;
 let idRecipe;
 let selectedRecipe;
-const favorites = JSON.parse(localStorage.getItem('Favoritos'));
-$('#' + favorites).addClass = 'favorite';
+const favorites = JSON.parse(localStorage.getItem('Favoritos')) || [];
+// $(favorites).addClass('favorite');
+$.each(favorites, function(index, value) {
+  $('#' + favorites).addClass('favorite');
+});
 
 function getRecipes() {
   const url = 'https://raw.githubusercontent.com/adrianosferreira/afrodite.json/master/afrodite.json';
@@ -22,47 +25,14 @@ function loadRecipes(data) {
     idRecipe = data[index]._id['$oid'];
     showAllRecipes();
   });
-  // const recipeList = data.map((value) => {
-  //   let findIndex = favorites.findIndex(favorite => favorite === idRecipe);
-  //   console.log(findIndex);
-  //   return `
-  //     <li data-id${idRecipe} class=${findIndex >= 0 ? 'favorite' : ''}> ${nameRecipe} </li>
-  //     `;
-  // }).join('');
 }
 
 function showAllRecipes() {
   $('#view-recipes').append(`
     <div class='rcp'>
-      <a href='receita/:${idRecipe}' data-id='${idRecipe}'><h4>${nameRecipe.toUpperCase()}</h4></a>
+      <a href='receita/:${idRecipe}' id='${idRecipe}'><h4>${nameRecipe.toUpperCase()}</h4></a>
     </div>
     `);
-}
-
-function addClickFavorite() {
-  $.each(data, function(value) {
-    $('a[data-id=idRecipe]').click(clickFavorite);
-  });
-}
-
-function clickFavorite(event) {
-  event.target.toggleClass('favorite');
-  const rcpId = $(event.target).attr('data-id');
-  const getFavorites = JSON.parse(localStorage.getItem('Favoritos'));
-  let putOnFavorites;
-
-  if (getFavorites) {
-    let newIndex = getFavorites.findIndex(value => value === rcpId);
-    if (newIndex >= 0) {
-      putOnFavorites = [...getFavorites];
-      putOnFavorites.splice(newIndex, 1);
-    } else {
-      putOnFavorites = [...getFavorites, rcpId];
-    }
-  } else {
-    putOnFavorites = [rcpId];
-  }
-  localStorage.setItem('Favoritos', JSON.stringify(putOnFavorites));
 }
 
 function callRecipe() {
@@ -81,6 +51,9 @@ function showOneRecipe(event) {
   selectedRecipe = $(event.target).closest('a').text();
   $('.name').append(`
     <h2>${selectedRecipe}</h2>
+    <a>
+    <small class='material-icons clicked' data-id='${event.path[1].id}'>favorite</small></a>
+    <i>Adicionar em Minhas Receitas</i>
     `);
 }
 
@@ -102,6 +75,34 @@ function showOneRecipeSection(data) {
       `);
   });
 };
+
+function clickFavorite(event) {
+  $(event.target).toggleClass('favorite');
+  const rcpId = $(event.target).attr('data-id');
+  const getFavorites = JSON.parse(localStorage.getItem('Favoritos'));
+  let putOnFavorites;
+
+  if (getFavorites) {
+    let newIndex = getFavorites.findIndex(value => value === selectedRecipe);
+    if (newIndex >= 0) {
+      putOnFavorites = [...getFavorites];
+      putOnFavorites.splice(newIndex, 1);
+    } else {
+      putOnFavorites = [...getFavorites, selectedRecipe];
+    }
+  } else {
+    putOnFavorites = [selectedRecipe];
+  }
+  localStorage.setItem('Favoritos', JSON.stringify(putOnFavorites));
+}
+
+function loadFavorites(event) {
+  const recipeList = favorites.map((value) => {
+    $('#view-favorites').append(`
+      <li>${value}</li>
+      `);
+  }).join('');
+}
 
 // let retornoFilter = data.filter(function(valor) {
 //   return valor === selectedRecipe ? valor : null;

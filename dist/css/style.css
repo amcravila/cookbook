@@ -17,8 +17,20 @@ html, body {
   font-family: "Helvetica Neue", sans-serif;
 }
 
+.material-icons {
+  color: gray;
+}
+
+.material-icons:hover {
+  color: blue;
+}
+
 .favorite {
-  color: pink;
+  color: blue;
+}
+
+.name h2 {
+  margin-top: 10px;
 }
 
 .fa-facebook{
