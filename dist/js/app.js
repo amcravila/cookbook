@@ -2,10 +2,7 @@ let nameRecipe;
 let idRecipe;
 let selectedRecipe;
 const favorites = JSON.parse(localStorage.getItem('Favoritos')) || [];
-// $(favorites).addClass('favorite');
-$.each(favorites, function(index, value) {
-  $('#' + favorites).addClass('favorite');
-});
+$(favorites).addClass('favorite');
 
 function getRecipes() {
   const url = 'https://raw.githubusercontent.com/adrianosferreira/afrodite.json/master/afrodite.json';
@@ -104,43 +101,29 @@ function loadFavorites(event) {
   }).join('');
 }
 
-// let retornoFilter = data.filter(function(valor) {
-//   return valor === selectedRecipe ? valor : null;
-// });
+function callSearch() {
+  const url = 'https://raw.githubusercontent.com/adrianosferreira/afrodite.json/master/afrodite.json';
 
-// let filtrados = data.filter(function(valor) {
-//   return valor === selectedRecipe ? valor : null;
-// });
+  $.ajax({
+    type: 'GET',
+    dataType: 'json',
+    url,
+    success: searchRecipe,
+    error
+  });
+}
 
-// console.log(filtrados);
+function searchRecipe(data) {
+  let searchValue = $('#recipe-src').val();
 
-// if(newIndex === data.index) {
-
-
-// function searchRecipe(data) {
-//   let srcWord = $('#recipe-src').val();
-//
-//   $.each(data, function(index, value) {
-//     // if (srcWord === value.name) {
-//       console.log(data[index].nome);
-//     // }
-//   });
-//   return false;
-// };
-
-            // var yahooOnly = JSON.parse(jsondata).filter(function (entry) {
-            //       return entry.website === 'yahoo';
-            //     });
-
-//   $.each(restaurantes, function(index, value) {
-//     if (inputValue === value.type) {
-//       $('.images').fadeOut();
-//       $('.imagesFilter').fadeIn();
-//       $('.imagesFilter').append("<img src= " + "'" + value.image + "'" + " id=" + "'" + index + "'" + " class='image'" + " data-toggle='modal' data-target='#modalMap'>");
-//       $('#filter').prop('disabled', true);
-//     }
-//   });
-// });
+  $.each(data, function(index, value) {
+    if (searchValue.toUpperCase() === data[index].nome.toUpperCase()) {
+      $('#view-results').append(`
+        <li>${data[index].nome}</li>
+        `);
+    }
+  });
+}
 
 function error() {
   throw new Error('Error! API was not loaded.');

@@ -54,8 +54,8 @@ function renderSearch() {
     <div class="container h-100">
       <div class="row h-100 align-itens-center">
         <div class="col-12">
-          <h2>Resultado da Pesquisa:${srcWord}</h2>
-          <div id="view-recipes"></div>
+          <h2>Resultado da Pesquisa:</h2>
+          <div id="view-results"></div>
         </div>
       </div>
     </div>

@@ -3,7 +3,7 @@ $(document).ready(() => {
   page('/receitas', recipes);
   page('/receita/:idRecipe', recipe);
   page('/minhasreceitas', favorites);
-  // page('/receita/:ingrediente', searchResult)
+  page('/busca', searchResult);
   page('/contact', contact);
   page('/*', function() {
     $('body').text('Page not found!');
@@ -13,7 +13,6 @@ $(document).ready(() => {
   function index() {
     $('main').html(renderIndex());
     $('#recipes').click(getRecipes);
-        // $('#btn-src').click(searchRecipe);
   }
 
   async function recipes() {
@@ -34,8 +33,8 @@ $(document).ready(() => {
   }
 
   function searchResult() {
-    $('main').html(renderSearch)
-    // searchRecipe;
+    $('main').html(renderSearch);
+    $('#btn-src').click(callSearch());
   }
 
   function contact() {

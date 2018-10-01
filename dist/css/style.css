@@ -17,6 +17,10 @@ html, body {
   font-family: "Helvetica Neue", sans-serif;
 }
 
+.cook {
+  font-size: 28px;
+}
+
 .material-icons {
   color: gray;
 }
