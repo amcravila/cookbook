@@ -3,8 +3,7 @@ function renderIndex() {
     <div class="background-overlay" style="background-image: url(/dist/img/livro.jpg);">
     <div class="container h-100">
       <div class="row" style="height: 400px">
-        <div class="col-12 ml-3"><br><br>
-          <h2>Caderno de Receitas</h2>
+        <div class="col-12 ml-3">
         </div>
       </div>
     </div>
